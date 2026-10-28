@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DSSC Academic Services Portal for monitoring academic status and submitting service requests.">
+  <title>DSSC Academic Services Portal</title>
+  <link rel="icon" href="image/image.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="app-shell" id="app-shell">
+    <button class="sidebar-backdrop" id="sidebar-backdrop" type="button" aria-label="Close navigation" tabindex="-1" hidden></button>
+
+    <aside id="sidebar" class="sidebar" aria-label="Portal sidebar" aria-hidden="true">
+      <div class="sidebar-heading">
+        <a class="brand" href="#dashboard" aria-label="DSSC Academic Services Portal home">
+          <img src="image/image.png" alt="" class="brand-logo" width="44" height="44">
+          <span class="brand-copy"><strong>DSSC</strong><small>Academic Services</small></span>
+        </a>
+        <button type="button" class="sidebar-close" id="sidebar-close" aria-label="Close navigation">&times;</button>
+      </div>
+      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+        <p class="nav-caption">Workspace</p>
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#dashboard" data-page="dashboard" aria-label="Dashboard" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-text">Dashboard</span></a></li>
+          <li><a class="nav-link" href="#requests" data-page="requests" aria-label="Requests"><span class="nav-icon" aria-hidden="true">▤</span><span class="nav-text">Requests</span></a></li>
+          <li><a class="nav-link" href="#enrollments" data-page="enrollments" aria-label="Enrollments"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-text">Enrollments</span></a></li>
+          <li><a class="nav-link" href="#grades" data-page="grades" aria-label="Grades"><span class="nav-icon" aria-hidden="true">✓</span><span class="nav-text">Grades</span></a></li>
+          <li><a class="nav-link" href="#faculty-records" data-page="faculty-records" aria-label="Faculty Records"><span class="nav-icon" aria-hidden="true">♙</span><span class="nav-text">Faculty Records</span></a></li>
+          <li><a class="nav-link" href="#settings" data-page="settings" aria-label="Settings"><span class="nav-icon" aria-hidden="true">⚙</span><span class="nav-text">Settings</span></a></li>
+        </ul>
+      </nav>
+      <section class="term-card" aria-label="Current academic term">
+        <span class="term-label">Current term</span>
+        <strong>1st Semester</strong>
+        <span>A.Y. 2026–2027</span>
+      </section>
+    </aside>
+
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="topbar-leading">
+          <button type="button" class="menu-toggle" id="menu-toggle" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation">
+            <span aria-hidden="true">☰</span>
+          </button>
+          <div class="topbar-title">
+            <p class="eyebrow">Davao del Sur State College</p>
+            <p class="topbar-page-title" id="topbar-page-title">Dashboard</p>
+          </div>
+        </div>
+        <div class="profile-badge" aria-label="Signed in as Mikko C. Momo, BSIT 3B">
+          <span class="avatar" aria-hidden="true">MM</span>
+          <span class="profile-copy"><strong>Mikko C. Momo</strong><small>BSIT · 3B</small></span>
+        </div>
+      </header>
+
+      <main id="main-content" class="main-content content" tabindex="-1">
+        <section class="page active" data-page="dashboard" aria-labelledby="h-dashboard">
+          <header class="page-heading">
+            <p class="eyebrow">Student dashboard</p>
+            <h1 id="h-dashboard" tabindex="-1">Dashboard</h1>
+            <p class="page-subtitle">Monitor your academic units, requests, and clearance status.</p>
+          </header>
+          <section class="dashboard-section" aria-labelledby="metrics-title">
+            <div class="section-heading">
+              <div><p class="eyebrow">Overview</p><h2 id="metrics-title">Academic &amp; clearance status</h2></div>
+              <span class="sync-status"><span aria-hidden="true"></span>Portal data up to date</span>
+            </div>
+            <div class="metric-grid" id="metric-grid" aria-live="polite">
+              <article class="metric-card"><h3>Active Units</h3><p class="metric-number" id="active-units">—</p><p class="metric-note">Enrolled this semester</p></article>
+              <article class="metric-card"><h3>Pending Requests</h3><p class="metric-number" id="pending-count">—</p><p class="metric-note">Awaiting review</p></article>
+              <article class="metric-card metric-card-alert"><h3>Clearance Deficiencies</h3><p class="metric-number" id="deficiency-count">—</p><p class="metric-note" id="clearance-note">Items requiring your attention</p></article>
+            </div>
+          </section>
+          <section class="dashboard-section table-section" aria-labelledby="recent-title">
+            <div class="section-heading requests-heading">
+              <div><p class="eyebrow">Your activity</p><h2 id="recent-title">Recent requests</h2><p class="section-intro">Latest service requests submitted to academic services.</p></div>
+            </div>
+            <table class="requests-table">
+              <caption class="sr-only">Recent service requests with their filing date and status</caption>
+              <thead><tr><th scope="col">Request ID</th><th scope="col">Service Type</th><th scope="col">Date Filed</th><th scope="col">Status</th></tr></thead>
+              <tbody id="dashboard-requests-body"></tbody>
+            </table>
+          </section>
+        </section>
+
+        <section class="page" data-page="requests" aria-labelledby="h-requests" hidden>
+          <header class="page-heading">
+            <p class="eyebrow">Student services</p>
+            <h1 id="h-requests" tabindex="-1">Requests</h1>
+            <p class="page-subtitle">Submit a service request and track its review status.</p>
+          </header>
+          <section class="dashboard-section request-section" aria-labelledby="form-title">
+            <div class="section-heading"><div><p class="eyebrow">New request</p><h2 id="form-title">Submit a service request</h2></div></div>
+            <p class="section-intro">Tell us what you need and the appropriate academic office will review your request.</p>
+            <div class="success-message" id="form-success" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+            <form id="request-form" novalidate>
+              <div class="form-field">
+                <label for="service-category">Service Category <span aria-hidden="true">*</span></label>
+                <select id="service-category" name="category" required disabled aria-describedby="category-help category-error">
+                  <option value="">Select a service</option>
+                  <option>Document Requisition</option>
+                  <option>Subject Overload Permit</option>
+                  <option>Grade Correction</option>
+                  <option>Enrollment Appeal</option>
+                </select>
+                <small id="category-help" class="field-help">Choose the service that best matches your request.</small>
+                <p class="error-msg" id="category-error" hidden></p>
+              </div>
+              <div class="form-field">
+                <label for="request-details">Reason / Request Details <span aria-hidden="true">*</span></label>
+                <textarea id="request-details" name="details" rows="4" minlength="10" required aria-describedby="details-help details-error" placeholder="Include relevant details to help us process your request."></textarea>
+                <small id="details-help" class="field-help">Enter at least 10 characters and include any useful context.</small>
+                <p class="error-msg" id="details-error" hidden></p>
+              </div>
+              <fieldset class="form-field urgency-field">
+                <legend>Urgency <span aria-hidden="true">*</span></legend>
+                <small id="urgency-help" class="field-help">Select the urgency level for this request.</small>
+                <div class="urgency-options">
+                  <label class="radio-option"><input type="radio" name="urgency" id="urgency-low" value="Low" required aria-describedby="urgency-help urgency-error"><span>Low</span></label>
+                  <label class="radio-option"><input type="radio" name="urgency" id="urgency-normal" value="Normal" aria-describedby="urgency-help urgency-error"><span>Normal</span></label>
+                  <label class="radio-option"><input type="radio" name="urgency" id="urgency-high" value="High" aria-describedby="urgency-help urgency-error"><span>High</span></label>
+                </div>
+                <p class="error-msg" id="urgency-error" hidden></p>
+              </fieldset>
+              <div class="form-actions">
+                <button type="submit" class="button button-primary" id="submit-button" disabled>Submit request</button>
+                <button type="reset" class="button button-secondary" id="reset-form">Reset form</button>
+              </div>
+            </form>
+          </section>
+          <section class="dashboard-section table-section" aria-labelledby="requests-title">
+            <div class="section-heading requests-heading">
+              <div><p class="eyebrow">Your activity</p><h2 id="requests-title">All requests</h2><p class="section-intro">Filter the requests you've submitted.</p></div>
+              <span class="request-count" id="request-count" aria-live="polite"></span>
+            </div>
+            <div class="filter-row" role="group" aria-label="Filter requests by status">
+              <button type="button" class="filter-chip" data-filter="All" aria-pressed="true">All</button>
+              <button type="button" class="filter-chip" data-filter="Pending" aria-pressed="false">Pending</button>
+              <button type="button" class="filter-chip" data-filter="Approved" aria-pressed="false">Approved</button>
+              <button type="button" class="filter-chip" data-filter="Rejected" aria-pressed="false">Rejected</button>
+            </div>
+            <table class="requests-table">
+              <caption class="sr-only">All service requests with their filing date and status</caption>
+              <thead><tr><th scope="col">Request ID</th><th scope="col">Service Type</th><th scope="col">Date Filed</th><th scope="col">Status</th></tr></thead>
+              <tbody id="requests-body"></tbody>
+            </table>
+          </section>
+        </section>
+
+        <section class="page" data-page="enrollments" aria-labelledby="h-enrollments" hidden>
+          <header class="page-heading"><p class="eyebrow">Academic records</p><h1 id="h-enrollments" tabindex="-1">Enrollments</h1><p class="page-subtitle">Review your enrollment information and course load.</p></header>
+          <div class="empty-state">No records yet.</div>
+        </section>
+
+        <section class="page" data-page="grades" aria-labelledby="h-grades" hidden>
+          <header class="page-heading"><p class="eyebrow">Academic records</p><h1 id="h-grades" tabindex="-1">Grades</h1><p class="page-subtitle">Review your academic results and grade records.</p></header>
+          <div class="empty-state">No records yet.</div>
+        </section>
+
+        <section class="page" data-page="faculty-records" aria-labelledby="h-faculty-records" hidden>
+          <header class="page-heading"><p class="eyebrow">College directory</p><h1 id="h-faculty-records" tabindex="-1">Faculty Records</h1><p class="page-subtitle">Access faculty directory and record information.</p></header>
+          <div class="empty-state">No records yet.</div>
+        </section>
+
+        <section class="page" data-page="settings" aria-labelledby="h-settings" hidden>
+          <header class="page-heading"><p class="eyebrow">Preferences</p><h1 id="h-settings" tabindex="-1">Settings</h1><p class="page-subtitle">Manage your portal preferences.</p></header>
+          <div class="empty-state">Settings panel coming soon.</div>
+        </section>
+
+        <footer class="page-footer">
+          <p>© 2026 Davao del Sur State College · Academic Services Portal</p>
+          <div class="footer-tools"><span class="system-status"><span aria-hidden="true"></span>All systems operational</span><button type="button" class="text-button" id="reset-demo">Reset demo data</button></div>
+        </footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
